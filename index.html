@@ -1,75 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>liberalrepublic</title>
-  <link href="https://fonts.googleapis.com/css?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #222;
-      font-family: 'Comfortaa';
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-    }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>liberalrepublic</title>
+        <link
+            href="https://fonts.googleapis.com/css?family=Comfortaa:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                background-color: #222;
+                font-family: "Comfortaa";
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
 
-    .text-container {
-      display: flex;
-      justify-content: center;
-      width: calc(90vw - 20px); /* Adjust based on element padding /
-    }
+            .text-container {
+                display: flex;
+                justify-content: center;
+                width: calc(90vw - 20px); /* Adjust based on element padding */
+            }
 
-    @media (max-width: 768px) { / Media query for mobile devices /
-      .title, .domain {
-        font-size: 10cqw; / Adjust for smaller screens /
-      }
-    }
+            @media (max-width: 768px) {
+                /* Media query for mobile devices */
+                .title,
+                .domain {
+                    font-size: 10cqw; /* Adjust for smaller screens */
+                }
+            }
 
-    .title, .domain {
-      font-size: 12cqw;
-      font-family: 'Comfortaa';
-      color: white;
-    }
+            .title,
+            .domain {
+                font-size: 12cqw;
+                font-family: "Comfortaa";
+                color: white;
+            }
 
-    .domain {
-      color: #22bbff;
-      # animation: color-change 5s infinite;
+            .domain {
+                font-size: 12cqw;
+                font-family: "Comfortaa";
+                animation: spin 10s infinite linear;
+                background-image: linear-gradient(
+                    0deg,
+                    blue,
+                    #22bbff,
+                    #fc9a03,
+                    red
+                );
+                background-size: 200%; /* Ensure the gradient covers the text */
+                background-clip: text;
+                -webkit-background-clip: text; /* Add WebKit prefix */
+                -webkit-text-fill-color: transparent; /* For WebKit browsers */
+                text-fill-color: transparent;
+            }
 
-      animation: spin 10s infinite;
-      animation-timing-function: linear;
-      --degr: 0;
-      background-image: linear-gradient(calc(var(--degr) 1deg), blue, #22bbff, #fc9a03, red);
-      background-size: 100%;
-      background-clip: text;
-      text-fill-color: transparent;
-      -webkit-text-fill-color: transparent
-    }
-    @property --degr {
-      syntax: "<number>";
-      initial-value: 0;
-      inherits: true;
-    }
-    @keyframes spin {
-      0% { --degr: 0; }
-      #50% { --degr: 180; }
-      100% { --degr: 360; }
-
-
-    }
-    @keyframes color-change {
-      0% { color: #22bbff; }
-      50% { color: #fc9a03; }
-      100% { color: #22bbff; }
-    }
-  </style>
-</head>
-<body>
-  <div class="text-container">
-    <span class="title">liberal</span>
-    <span class="domain">republic</span>
-  </div>
-</body>
+            /* Spin animation to update the gradient angle */
+            @keyframes spin {
+                0% {
+                    background-image: linear-gradient(
+                        0deg,
+                        blue,
+                        #22bbff,
+                        #fc9a03,
+                        red
+                    );
+                }
+                50% {
+                    background-image: linear-gradient(
+                        0deg,
+                        red,
+                        #fc9a03,
+                        #22bbff,
+                        blue
+                    );
+                }
+                100% {
+                    background-image: linear-gradient(
+                        360deg,
+                        blue,
+                        #22bbff,
+                        #fc9a03,
+                        red
+                    );
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="text-container">
+            <span class="title">liberal</span>
+            <span class="domain">republic</span>
+        </div>
+    </body>
 </html>
