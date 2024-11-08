@@ -3,97 +3,97 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>liberalrepublic</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Liberal Republic</title>
         <link
             href="https://fonts.googleapis.com/css?family=Comfortaa:wght@400;700&display=swap"
             rel="stylesheet"
         />
         <style>
             body {
-                background-color: #222;
-                font-family: "Comfortaa";
-                display: flex;
+                margin: 0;
+                height: 100vh;
                 justify-content: center;
                 align-items: center;
-                min-height: 100vh;
-                margin: 0;
-            }
-
-            .text-container {
-                display: flex;
-                justify-content: center;
-                width: calc(90vw - 20px); /* Adjust based on element padding */
-            }
-
-            @media (max-width: 768px) {
-                /* Media query for mobile devices */
-                .title,
-                .domain {
-                    font-size: 10cqw; /* Adjust for smaller screens */
-                }
-            }
-
-            .title,
-            .domain {
-                font-size: 12cqw;
+                background-color: #222;
                 font-family: "Comfortaa";
+            }
+
+            h1 {
+                font-size: 4rem;
+                text-align: center;
+            }
+
+            .liberal {
                 color: white;
             }
 
-            .domain {
-                font-size: 12cqw;
-                font-family: "Comfortaa";
-                animation: spin 10s infinite linear;
+            .republic {
                 background-image: linear-gradient(
-                    0deg,
+                    to right,
+                    blue,
+                    #22bbff,
+                    #fc9a03,
+                    red,
+                    #fc9a03,
+                    #22bbff,
                     blue,
                     #22bbff,
                     #fc9a03,
                     red
                 );
-                background-size: 200%; /* Ensure the gradient covers the text */
+                -webkit-background-clip: text;
                 background-clip: text;
-                -webkit-background-clip: text; /* Add WebKit prefix */
-                -webkit-text-fill-color: transparent; /* For WebKit browsers */
-                text-fill-color: transparent;
+                color: transparent;
+
+                background-size: 300%;
+                background-position: 0%;
+
+                animation: animatedText 5s infinite linear;
             }
 
-            /* Spin animation to update the gradient angle */
-            @keyframes spin {
-                0% {
-                    background-image: linear-gradient(
-                        0deg,
-                        blue,
-                        #22bbff,
-                        #fc9a03,
-                        red
-                    );
+            @keyframes animatedText {
+                to {
+                    background-position: 100%;
                 }
-                50% {
-                    background-image: linear-gradient(
-                        0deg,
-                        red,
-                        #fc9a03,
-                        #22bbff,
-                        blue
-                    );
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 3rem;
                 }
-                100% {
-                    background-image: linear-gradient(
-                        360deg,
-                        blue,
-                        #22bbff,
-                        #fc9a03,
-                        red
-                    );
+            }
+
+            @media (max-width: 480px) {
+                h1 {
+                    font-size: 2rem;
                 }
+            }
+
+            header,
+            img {
+                display: inline-block;
+                float: none;
+                width: 100%;
+            }
+
+            img {
+                display: block;
+                margin: 0 auto;
+                max-width: 100%;
+                height: auto;
             }
         </style>
     </head>
     <body>
-        <div class="text-container">
-            <span class="title">liberal</span>
-            <span class="domain">republic</span>
-        </div>
+        <header>
+            <h1>
+                <span class="liberal">liberal</span
+                ><span class="republic">republic</span>
+            </h1>
+        </header>
+
+        <img src="3A.png" />
     </body>
 </html>
