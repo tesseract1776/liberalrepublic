@@ -10,18 +10,295 @@
             rel="stylesheet"
         />
         <style>
-            body {
+            body,
+            ul,
+            li,
+            a,
+            input,
+            select {
                 margin: 0;
-                height: 100vh;
-                justify-content: center;
-                align-items: center;
+                padding: 0;
+                //min-height: 100vh;
+                //justify-content: center;
+                //align-items: center;
                 background-color: #222;
+                color: #fff;
                 font-family: "Comfortaa";
+                box-sizing: border-box;
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: inherit;
+            }
+            img {
+                max-width: 100%;
+                height: auto;
             }
 
-            h1 {
-                font-size: 4rem;
+            /* Navbar Styles */
+            .navbar {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: #222;
+                color: #fff;
+                padding: 10px 20px;
+                position: fixed;
+                top: 0; /* Anchor to top */
+                left: 0;
+                width: 100%;
+                z-index: 10; /* Ensure it stays above other elements */
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            }
+
+            /* Hamburger Menu */
+            .menu-icon input[type="checkbox"] {
+                position: relative;
+                display: none;
+            }
+
+            .hamburger {
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .hamburger span {
+                background: #fff;
+                height: 3px;
+                width: 20px;
+                display: block;
+                transition: all 0.3s ease;
+            }
+
+            #menu-toggle:checked ~ .flyout-menu {
+                transform: translateX(0);
+                box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5); /* Neater flyout look */
+            }
+            #menu-toggle:checked ~ body::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(
+                    0,
+                    0,
+                    0,
+                    0.7
+                ); /* Darken the rest of the site */
+                z-index: 9; /* Overlay to dim the background */
+            }
+
+            .flyout-menu {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 0px;
+                left: 0;
+                background: rgba(
+                    0,
+                    0,
+                    0,
+                    0.95
+                ); /* Slight dark tint to the background */
+                color: #fff;
+                width: 400px;
+                height: 100vh;
+                transform: translateX(-300%);
+                transition: transform 0.3s ease;
+                padding: 20px;
+                z-index: 10;
+            }
+
+            .flyout-menu .logo {
                 text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .flyout-menu .close-icon {
+                position: absolute;
+                top: 10px;
+                right: 15px;
+                font-size: 20px;
+                cursor: pointer;
+                color: #fff;
+                background: none;
+                border: none;
+                outline: none;
+            }
+
+            #menu-toggle:checked ~ .flyout-menu .close-icon {
+                display: block; /* Ensure close icon shows only when menu is open */
+            }
+            .close-icon {
+                display: none; /* Default state hidden */
+            }
+
+            .flyout-menu ul {
+                list-style: none;
+            }
+
+            .flyout-menu li a {
+                display: block;
+                color: #fff;
+                background: rgba(
+                    0,
+                    0,
+                    0,
+                    0.95
+                ); /* Slight dark tint to the background */
+
+                text-decoration: none;
+                padding: 10px 0;
+            }
+
+            /* Logo and Title */
+            .logo img {
+                height: 40px; /* Adjust height to fit the navbar */
+                width: auto; /* Maintain aspect ratio */
+            }
+
+            .site-title {
+                font-size: 1.2em;
+                margin-left: 0px;
+            }
+
+            /* Social Media Icons */
+            .social-icons a {
+                margin: 0 5px;
+                color: #fff;
+                text-decoration: none;
+            }
+
+            /* Nav Tabs */
+            .nav-tabs {
+                display: flex;
+                gap: 0px;
+                list-style: none;
+            }
+
+            .nav-tabs li a {
+                color: #fff;
+                text-decoration: none;
+                padding: 5px 10px;
+                transition: background 0.3s;
+            }
+
+            .nav-tabs li a:hover {
+                background: #444;
+                border-radius: 5px;
+            }
+
+            /* Search Box */
+            .search-box {
+                display: flex;
+                align-items: center;
+                position: relative;
+            }
+
+            .search-icon {
+                cursor: pointer;
+            }
+
+            #search-toggle:checked ~ .search-input {
+                opacity: 1;
+                width: 150px;
+            }
+
+            .search-input {
+                position: absolute;
+                top: 0;
+                left: 20px;
+                opacity: 0;
+                width: 0;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .search-input input {
+                width: 100%;
+                padding: 5px;
+                border: none;
+                border-radius: 5px;
+            }
+
+            /* Language Selector */
+            .language-select select {
+                padding: 5px;
+                border-radius: 5px;
+                border: none;
+            }
+
+            /* Notifications */
+            .notifications {
+                position: relative;
+            }
+
+            .notif-icon {
+                cursor: pointer;
+            }
+
+            #notif-toggle:checked ~ .notif-menu {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .notif-menu {
+                position: absolute;
+                top: 30px;
+                right: 0;
+                background: #333;
+                color: #fff;
+                padding: 10px;
+                width: 200px;
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: all 0.3s ease;
+                border-radius: 5px;
+            }
+
+            .notif-menu ul {
+                list-style: none;
+            }
+
+            .notif-menu li {
+                padding: 5px 0;
+                border-bottom: 1px solid #444;
+            }
+
+            .notif-menu li:last-child {
+                border-bottom: none;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+            h1 {
+                font-size: 1.5rem;
+                margin: 0;
+                text-align: center;
+            }
+
+            h2 {
+                color: #fff;
+            }
+
+            .liberal,
+            .republic {
+                /*
+                font-size: clamp(
+                    1rem,
+                    2vw,
+                    1.5rem
+                ); /* Adjust font size dynamically */
+                /*white-space: nowrap; /* Prevent wrapping */
+                //overflow: hidden; /* Prevent overflow */
+                //max-width: fit-content; /* Allow flexible width */
+                //display: block; /* Prevent inline spacing issues */
             }
 
             .liberal {
@@ -84,16 +361,183 @@
                 max-width: 100%;
                 height: auto;
             }
+
+            .section {
+                padding: 20px;
+                min-height: calc(100vh - 60px); /* Adjust for navbar height */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                //position: relative;
+            }
+
+            .svg-links {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 15px; /* Space between icons */
+            }
+            .svg-links a {
+                display: inline-block;
+                width: 32px; /* Icon size */
+                height: 32px;
+                color: currentColor; /* Inherit text color */
+                transition:
+                    transform 0.2s ease,
+                    color 0.2s ease;
+            }
+            .svg-links a:hover {
+                transform: scale(1.1); /* Slight zoom on hover */
+                color: orange; /* Change color on hover */
+            }
+            .svg-links svg {
+                width: 100%;
+                height: 100%;
+                fill: currentColor; /* Ensure the SVG adopts the link color */
+            }
         </style>
     </head>
     <body>
         <header>
-            <h1>
-                <span class="liberal">liberal</span
-                ><span class="republic">republic</span>
-            </h1>
-        </header>
+            <nav class="navbar">
+                <div class="menu-icon">
+                    <input type="checkbox" id="menu-toggle" />
+                    <label for="menu-toggle" class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
+                    <div class="flyout-menu">
+                        <label for="menu-toggle" class="close-icon">X</label>
+                        <!-- Close icon -->
+                        <div class="logo">
+                            <img src="3A.png" />
+                        </div>
+                        <h1>
+                            <span class="liberal">liberal</span
+                            ><span class="republic">republic</span>
+                        </h1>
+                        <ul>
+                            <li><a href="#home">Home</a></li>
+                            <li><a href="#blog">Blog</a></li>
+                            <li><a href="#learn">Learn</a></li>
+                            <li><a href="#tools">Tools</a></li>
+                            <li><a href="#support">Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="logo">
+                    <img src="3A.png" />
+                </div>
+                <h1>
+                    <span class="liberal">liberal</span
+                    ><span class="republic">republic</span>
+                </h1>
 
-        <img src="3A.png" />
+                <div class="svg-links">
+                    <a
+                        href="https://bsky.app/profile/liberalrepublic.org"
+                        target="_blank"
+                        aria-label="Bluesky"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                        >
+                            <path
+                                d="M23.931,5.298c-3.21,2.418-6.663,7.32-7.931,9.951-1.267-2.631-4.721-7.533-7.931-9.951-2.316-1.744-6.069-3.094-6.069,1.201,0,.857,.49,7.206,.778,8.237,.999,3.583,4.641,4.497,7.881,3.944-5.663,.967-7.103,4.169-3.992,7.372,5.908,6.083,8.492-1.526,9.154-3.476,.123-.36,.179-.527,.179-.379,0-.148,.057,.019,.179,.379,.662,1.949,3.245,9.558,9.154,3.476,3.111-3.203,1.671-6.405-3.992-7.372,3.24,.553,6.882-.361,7.881-3.944,.288-1.031,.778-7.38,.778-8.237,0-4.295-3.753-2.945-6.069-1.201Z"
+                            ></path>
+                        </svg>
+                    </a>
+                    <a
+                        href="https://www.youtube.com/@LiberalRepublic1776"
+                        target="_blank"
+                        aria-label="Youtube"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                        >
+                            <path
+                                d="M31.331,8.248c-.368-1.386-1.452-2.477-2.829-2.848-2.496-.673-12.502-.673-12.502-.673,0,0-10.007,0-12.502,.673-1.377,.37-2.461,1.462-2.829,2.848-.669,2.512-.669,7.752-.669,7.752,0,0,0,5.241,.669,7.752,.368,1.386,1.452,2.477,2.829,2.847,2.496,.673,12.502,.673,12.502,.673,0,0,10.007,0,12.502-.673,1.377-.37,2.461-1.462,2.829-2.847,.669-2.512,.669-7.752,.669-7.752,0,0,0-5.24-.669-7.752ZM12.727,20.758V11.242l8.364,4.758-8.364,4.758Z"
+                            ></path>
+                        </svg>
+                    </a>
+                    <a
+                        href="https://discord.gg/tDhRxJUR"
+                        target="_blank"
+                        aria-label="Discord"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                        >
+                            <path
+                                d="M26.413,6.536c-1.971-.902-4.052-1.543-6.189-1.904-.292,.523-.557,1.061-.793,1.612-2.277-.343-4.592-.343-6.869,0-.236-.551-.5-1.089-.793-1.612-2.139,.365-4.221,1.006-6.194,1.909C1.658,12.336,.596,17.987,1.127,23.558h0c2.294,1.695,4.861,2.984,7.591,3.811,.615-.827,1.158-1.704,1.626-2.622-.888-.332-1.744-.741-2.56-1.222,.215-.156,.425-.316,.628-.472,4.806,2.26,10.37,2.26,15.177,0,.205,.168,.415,.328,.628,.472-.817,.483-1.676,.892-2.565,1.225,.467,.918,1.011,1.794,1.626,2.619,2.732-.824,5.301-2.112,7.596-3.808h0c.623-6.461-1.064-12.06-4.46-17.025Zm-15.396,13.596c-1.479,0-2.702-1.343-2.702-2.994s1.18-3.006,2.697-3.006,2.73,1.354,2.704,3.006-1.192,2.994-2.699,2.994Zm9.967,0c-1.482,0-2.699-1.343-2.699-2.994s1.18-3.006,2.699-3.006,2.723,1.354,2.697,3.006-1.189,2.994-2.697,2.994Z"
+                            ></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <ul class="nav-tabs">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#learn">Learn</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                    <li><a href="#support">Support</a></li>
+                </ul>
+
+                <!-- --
+                <div class="search-box">
+                    <input type="checkbox" id="search-toggle" />
+                    <label for="search-toggle" class="search-icon">🔍</label>
+                    <div class="search-input">
+                        <input type="text" placeholder="Search..." />
+                    </div>
+                </div>
+                    <div class="language-select">
+                        <select>
+                            <option value="en">EN</option>
+                            <option value="es">ES</option>
+                            <option value="fr">FR</option>
+                        </select>
+                    </div>
+                <div class="notifications">
+                    <input type="checkbox" id="notif-toggle" />
+                    <label for="notif-toggle" class="notif-icon">🔔</label>
+                    <div class="notif-menu">
+                        <ul>
+                            <li>New Message!</li>
+                            <li>System Update</li>
+                            <li>Friend Request</li>
+                        </ul>
+                    </div>
+                </div>
+                -->
+            </nav>
+        </header>
+        <!-- Sections -->
+        <section id="home" class="section">
+            <h2>Welcome to the Liberal Republic</h2>
+        </section>
+        <section id="blog" class="section">
+            <h2>Blog posts here</h2>
+        </section>
+        <section id="learn" class="section">
+            <h2>Learn with Us</h2>
+        </section>
+        <section id="tools" class="section">
+            <h2>Explore Our Tools</h2>
+        </section>
+        <section id="support" class="section">
+            <h2>Need Support? We Are Here to Help</h2>
+        </section>
     </body>
 </html>
