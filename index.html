@@ -32,13 +32,15 @@
                 box-sizing: inherit;
             }
             img {
-                max-width: 100%;
+                //max-width: 100%;
                 height: auto;
             }
 
             /* Navbar Styles */
             .navbar {
                 display: flex;
+                flex-wrap: nowrap;
+                //overflow: hidden;
                 align-items: center;
                 justify-content: space-between;
                 background: #222;
@@ -106,12 +108,13 @@
                     0.95
                 ); /* Slight dark tint to the background */
                 color: #fff;
-                width: 400px;
+                width: 20rem;
                 height: 100vh;
                 transform: translateX(-300%);
                 transition: transform 0.3s ease;
                 padding: 20px;
                 z-index: 10;
+                //overflow: visible;
             }
 
             .flyout-menu .logo {
@@ -158,7 +161,7 @@
 
             /* Logo and Title */
             .logo img {
-                height: 40px; /* Adjust height to fit the navbar */
+                height: 1.2em; /* Adjust height to fit the navbar */
                 width: auto; /* Maintain aspect ratio */
             }
 
@@ -179,6 +182,7 @@
                 display: flex;
                 gap: 0px;
                 list-style: none;
+                //visibility: hidden;
             }
 
             .nav-tabs li a {
@@ -275,11 +279,12 @@
             }
 
             .logo img {
-                height: 40px;
+                height: 2.4em;
+                width: auto;
             }
 
             .tulip-btn {
-                height: 120px;
+                height: 10vw;
                 width: auto;
                 transition: all 0.2s ease-in-out;
             }
@@ -289,7 +294,7 @@
             }
 
             .tulip-logo {
-                height: 500px;
+                height: 20vw;
                 width: auto;
             }
 
@@ -321,22 +326,22 @@
             }
 
             h3 {
-                font-size: 5rem;
+                font-size: 3rem;
                 margin: 0;
                 text-align: right;
             }
 
             .liberal,
             .republic {
-                /*
                 font-size: clamp(
                     1rem,
-                    2vw,
+                    2.5vw,
                     1.5rem
                 ); /* Adjust font size dynamically */
                 /*white-space: nowrap; /* Prevent wrapping */
                 //overflow: hidden; /* Prevent overflow */
-                //max-width: fit-content; /* Allow flexible width */
+                max-width: fit-content; /* Allow flexible width */
+                align-items: center; /* Align the image and heading vertically */
                 //display: block; /* Prevent inline spacing issues */
             }
 
@@ -374,7 +379,7 @@
                 }
             }
 
-            /* Responsive adjustments */
+            /* Responsive adjustments
             @media (max-width: 768px) {
                 h1 {
                     font-size: 3rem;
@@ -386,6 +391,7 @@
                     font-size: 2rem;
                 }
             }
+            */
 
             header,
             img {
@@ -397,7 +403,7 @@
             img {
                 //display: block;
                 //margin: 0 auto;
-                max-width: 100%;
+                //max-width: 100%;
                 height: auto;
             }
 
@@ -416,6 +422,7 @@
                 justify-content: center;
                 align-items: center;
                 gap: 15px; /* Space between icons */
+                padding: 10px;
             }
             .svg-links a {
                 display: inline-block;
